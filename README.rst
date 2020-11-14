@@ -4,6 +4,13 @@ python-mro-graph generator
 A small tool to generate and illustrate (via dot) the method resolution order graph of
 Python objects
 
+Based off of Michele Simionato's original work from 2003, which you can find here:
+http://www.phyast.pitt.edu/~micheles/python/drawMRO.html
+
+I added packaging foam and a click based command line interface and some minor
+updates. Nothing that changes the basic functionality much, except perhaps an additional
+dot-source export.
+
 Requirements
 ============
 
