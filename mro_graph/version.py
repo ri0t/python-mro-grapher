@@ -7,7 +7,7 @@ Uses SCM versioning to actually import the version
 """
 
 try:
-    from mro_grapher.scm_version import version
+    from mro_graph.scm_version import version
 
     version_info = version
 except ImportError as e:

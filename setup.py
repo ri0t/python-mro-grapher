@@ -7,7 +7,7 @@ with open("README.rst", "r") as f:
     readme = f.read()
 
 setup(
-    name="python-mro-grapher",
+    name="mro-graph",
     description="A small tool to generate and illustrate (via dot) the method "
                 "resolution order graph of Python objects ",
     author="Michele Simionato ",
@@ -31,18 +31,18 @@ setup(
         "Programming Language :: Python :: Implementation :: CPython",
     ],
     packages=[
-        "mro_grapher",
+        "mro_graph",
     ],
     long_description=readme,
     long_description_content_type="text/x-rst",
     entry_points="""[console_scripts]
-    mro-grapher=mro_grapher.mro_graph:main
+    mro-graph=mro_graph.mro_graph:main
     """,
     install_requires=[
         "click>=7.1.2"
     ],
     use_scm_version={
-        "write_to": "mro_grapher/scm_version.py",
+        "write_to": "mro_graph/scm_version.py",
     },
     setup_requires=["setuptools_scm"],
     test_suite="tests.main.main",

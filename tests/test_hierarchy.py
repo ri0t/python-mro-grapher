@@ -11,7 +11,7 @@ License: Python-like
 Requires: Python 2.3, dot, standard Unix tools
 """
 
-from mro_grapher.mro_graph import MRO_Graph
+from mro_graph import MROGraph
 
 
 def testHierarchy(**options):
@@ -39,7 +39,7 @@ def testHierarchy(**options):
     class A(B, C):
         pass
 
-    return MRO_Graph(A, M, **options)
+    return MROGraph(A, M, **options)
 
 
 if __name__ == "__main__":
