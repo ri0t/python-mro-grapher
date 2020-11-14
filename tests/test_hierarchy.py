@@ -14,7 +14,7 @@ Requires: Python 2.3, dot, standard Unix tools
 from mro_graph import MROGraph
 
 
-def testHierarchy(**options):
+def test_hierarchy(**options):
     class M(type):
         pass  # metaclass
 
@@ -28,6 +28,7 @@ def testHierarchy(**options):
         pass
 
     class G(object):
+        # noinspection PyUnusedName
         __metaclass__ = M
 
     class C(F, D, G):
@@ -43,4 +44,4 @@ def testHierarchy(**options):
 
 
 if __name__ == "__main__":
-    testHierarchy()  # generates a postscript diagram of A and M hierarchies
+    test_hierarchy()  # generates a postscript diagram of A and M hierarchies
