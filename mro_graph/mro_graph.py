@@ -54,6 +54,16 @@ def mro(cls):
     return "\n".join(out)
 
 
+def quote_id(s):
+    """
+    Quote a Graphviz ID.
+    """
+    # according to https://www.graphviz.org/doc/info/lang.html backslash need not be escaped
+    # which means odd number of trailing backslash cannot be escaped
+    # we don't test for it here
+    return '"' + s.replace('"', r'\"') + '"'
+
+
 class MROGraph(object):
     def __init__(self, *classes, **options):
         """Generates the MRO graph of a set of given classes.
@@ -112,7 +122,7 @@ class MROGraph(object):
             *[self.generate_mro_dot_code(cls) for cls in classes]
         )
 
-        self.dot_code = "digraph %s{\n%s%s}" % (name, setup_code, "\n".join(code_iter))
+        self.dot_code = "digraph %s{\n%s%s}" % (quote_id(name), setup_code, "\n".join(code_iter))
 
         if file_format == "dot":
             with open(filename, "w") as f:
@@ -135,8 +145,8 @@ class MROGraph(object):
                     [
                         " edge [style=solid]; %s -> %s %s;\n"
                         % (
-                            b.__name__,
-                            name,
+                            quote_id(b.__name__),
+                            quote_id(name),
                             '[label="%s"]' % (i + 1)
                             if many_parents and self.labels == 2
                             else "",
@@ -153,10 +163,10 @@ class MROGraph(object):
             option = (
                 "[%s]" % label if issubclass(cls, type) else "[shape=box,%s]" % label
             )
-            yield " %s %s;\n" % (name, option)
+            yield " %s %s;\n" % (quote_id(name), option)
             if type(c) is not type:  # c has a custom metaclass
                 meta_name = type(c).__name__
-                yield " edge [style=dashed]; %s -> %s;" % (meta_name, name)
+                yield " edge [style=dashed]; %s -> %s;" % (quote_id(meta_name), quote_id(name))
 
     def __repr__(self):
         """Returns the Dot representation of the graph"""
